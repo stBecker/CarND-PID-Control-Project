@@ -1,0 +1,15 @@
+1. Describe the effect each of the P, I, D components had in your implementation.
+
+The proportional component's responsibility is to quickly reduce the CTE. A large value leads to a quick adjustion, 
+but will also result in a large overshoot.
+The integral component has the job of eliminating any systematic biases to the goal line. For this project it was not
+very important, because there was no or only a sufficiently small bias and the curvature of the track made frequent
+adjustments necessary anyway.
+The derivative component is used to reduce the overshoot and stabilize the vehicle.
+
+
+2. Describe how the final hyperparameters were chosen.
+
+The parameters were chosen by manual tuning. Starting with Ki = 0 and Kd = 0, the Kp was adjusted until a sufficient
+correction velocity with limited overshooting had been observed. Then Kd was increased to reduce the overshoot. Ultimately
+Ki was set to a small value, but turned out not to be very important.
