@@ -24,13 +24,15 @@ void PID::UpdateError(double cte) {
   i_error = Ki*sum_cte;
   d_error = Kd*(cte - previous_cte);
   previous_cte = cte;
+
+  total_error += cte*cte;
 }
 
 double PID::TotalError() {
-
+  return total_error;
 }
 
-double PID::GetSteering() {
+double PID::GetControlValue() {
   double a = -p_error - i_error - d_error;
   // clip a between [-1, 1]
   return max(min(a, 1.0), -1.0);

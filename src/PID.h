@@ -13,6 +13,8 @@ public:
   double sum_cte = 0.0;
   double previous_cte = 0.0;
 
+  double total_error = 0.0;
+
   /*
   * Coefficients
   */ 
@@ -45,7 +47,7 @@ public:
   */
   double TotalError();
 
-  double GetSteering();
+  double GetControlValue();
 };
 
 #endif /* PID_H */
