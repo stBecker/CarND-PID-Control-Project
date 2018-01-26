@@ -35,9 +35,9 @@ int main()
 
   PID pid;
   // TODO: Initialize the pid variable.
-  double Kp = 0.5;
+  double Kp = 0.4;
   double Ki = 0.0001;
-  double Kd = 30;
+  double Kd = 50;
   pid.Init(Kp, Ki, Kd);
 
   PID speed_pid;
@@ -65,8 +65,7 @@ int main()
           * NOTE: Feel free to play around with the throttle and speed. Maybe use
           * another PID controller to control the speed!
           */
-          const double speed_goal = 60.0;
-          const double steering_threshold = 0.001;
+          const double speed_goal = 50.0;
           const double safety_margin = 1.0;
 
           pid.UpdateError(cte);
@@ -76,16 +75,6 @@ int main()
           double speed_error = (speed - speed_goal)/ speed_goal;
           speed_pid.UpdateError(speed_error);
           double throttle = speed_pid.GetControlValue();
-
-          //std::cout << "throttle: " << throttle << " p " << speed_pid.p_error << std::endl;
-
-          // stabilize steering
-          ////std::cout << "steer: " << steer_value << " p " << pid.p_error << std::endl;
-          //if (fabs(steer_value) < steering_threshold)
-          //{
-          //  //std::cout << "abs steer: " << fabs(steer_value) << std::endl;
-          //  steer_value = 0.0;
-          //}
 
           // slow down if too far from road center
           if (fabs(cte) >= safety_margin)
